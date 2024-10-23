@@ -70,6 +70,7 @@ public function deletePost(Posts $post){
     if (Gate::denies('delete-post', $post)) {
         return redirect()->back()->with('error', 'You are not authorized to edit this post.');
     }
+    $post->likes()->detach();
     $post->delete();
 
     return redirect('blog');
